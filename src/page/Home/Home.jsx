@@ -1,3 +1,4 @@
+import getFilms from 'getFilms/getFilms';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,16 +12,9 @@ const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-
-        return response.json();
-      })
-      .then(({ results }) => setTernd([...results]))
-      .catch(err => console.log(err));
+    getFilms(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`).then(
+      ({ results }) => setTernd([...results])
+    );
   }, []);
 
   return (

@@ -1,4 +1,6 @@
+import getFilms from 'getFilms/getFilms';
 import { Suspense, useEffect } from 'react';
+import { useRef } from 'react';
 import { useState } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 
@@ -13,22 +15,20 @@ const MovieDetails = () => {
   const API_KEY = '40e5fb6b16c3c0f0cef94ac33091be49';
   const BASE_URL = 'https://api.themoviedb.org/3';
   const location = useLocation();
+  let isLocationTrue = useRef(true);
 
   useEffect(() => {
-    fetch(
-      `${BASE_URL}/movie/${movieId.toString()}?api_key=${API_KEY}&language=en-US`
-    )
-      .then(respone => {
-        if (!respone.ok) {
-          throw new Error(respone.status);
-        }
+    if (isLocationTrue.current) {
+      getFilms(
+        `${BASE_URL}/movie/${movieId.toString()}?api_key=${API_KEY}&language=en-US`
+      ).then(setFilm);
 
-        return respone.json();
-      })
-      .then(setFilm)
-      .catch(err => console.log(err));
+      setUrl(location);
+    } else {
+      return;
+    }
 
-    setUrl(location);
+    isLocationTrue.current = false;
   }, [movieId, location]);
 
   if (!film) {

@@ -1,3 +1,4 @@
+import getFilms from 'getFilms/getFilms';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
@@ -23,23 +24,13 @@ const Movies = () => {
     if (!query.get('query')) {
       return;
     }
-
     const API_KEY = '40e5fb6b16c3c0f0cef94ac33091be49';
     const BASE_URL = 'https://api.themoviedb.org/3';
     const FILM_NAME = query.get('query');
 
-    fetch(
+    getFilms(
       `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${FILM_NAME}&page=1&include_adult=false`
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-
-        return response.json();
-      })
-      .then(({ results }) => setFilms([...results]))
-      .catch(err => console.log(err));
+    ).then(({ results }) => setFilms([...results]));
   }, [query]);
 
   return (

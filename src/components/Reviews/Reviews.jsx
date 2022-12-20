@@ -1,3 +1,4 @@
+import getFilms from 'getFilms/getFilms';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,18 +12,9 @@ const Reviews = () => {
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   useEffect(() => {
-    fetch(
+    getFilms(
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-
-        return response.json();
-      })
-      .then(({ results }) => setReviews([...results]))
-      .catch(err => console.log(err));
+    ).then(({ results }) => setReviews([...results]));
   }, [movieId]);
 
   return reviews.length ? (

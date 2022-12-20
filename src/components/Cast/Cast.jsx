@@ -1,3 +1,4 @@
+import getFilms from 'getFilms/getFilms';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,21 +13,12 @@ const Cast = () => {
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   useEffect(() => {
-    fetch(
+    getFilms(
       `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-
-        return response.json();
-      })
-      .then(({ cast }) => setActor(cast))
-      .catch(err => console.log(err));
+    ).then(({ cast }) => setActor(cast));
   }, [movieId]);
 
-  return (
+  return actor.length !== 0 ? (
     <ul className={css.cast__list}>
       {actor.map(({ name, id, profile_path }) => {
         return (
@@ -46,6 +38,8 @@ const Cast = () => {
         );
       })}
     </ul>
+  ) : (
+    <p>We don`t have any cast for this movie...</p>
   );
 };
 
