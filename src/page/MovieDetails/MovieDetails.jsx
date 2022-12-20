@@ -29,7 +29,7 @@ const MovieDetails = () => {
       .catch(err => console.log(err));
 
     setUrl(location);
-  }, [movieId]);
+  }, [movieId, location]);
 
   if (!film) {
     return null;
