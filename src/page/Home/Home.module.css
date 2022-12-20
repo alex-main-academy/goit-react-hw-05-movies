@@ -1,0 +1,26 @@
+.trend__title {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.trend__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trend__link {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    transition-duration: 300ms;
+}
+
+.trend__link:hover {
+    color: rgb(96, 238, 243);
+}

@@ -1,0 +1,52 @@
+.movie__search {
+    outline: none;
+    border: 1px solid gray;
+    border-right: none;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+    height: 30px;
+    width: 200px;
+}
+
+.movie__button {
+    outline: none;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 32px;
+    padding: 0 10px;
+    margin: 0;
+    cursor: pointer;
+
+    transition-duration: 500ms;
+}
+
+.movie__button:hover {
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.movie__list {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.movie__link {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    transition-duration: 300ms;
+}
+
+.movie__link:hover {
+    color: rgb(96, 238, 243);
+}
